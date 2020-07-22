@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -135,19 +136,47 @@ class _InputPageState extends State<InputPage> {
             onPress: () {
               CalculateBMI calc = CalculateBMI(height: height, weight: weight);
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ResultsPage(
-                          score: calc.getBMIValue(),
-                          message: calc.getMessage(),
-                          result: calc.getResult(),
-                        )),
-              );
+              selectedGender == null
+                  ? alertUser(context)
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ResultsPage(
+                                score: calc.getBMIValue(),
+                                message: calc.getMessage(),
+                                result: calc.getResult(),
+                              )),
+                    );
             },
           ),
         ],
       ),
+    );
+  }
+
+  Future alertUser(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            'You need to select a gender!',
+            style: kBMIDescriptionStyle,
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Approve'),
+              color: kButtonColor,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          backgroundColor: kActiveCardColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(2.0))),
+        );
+      },
     );
   }
 }
