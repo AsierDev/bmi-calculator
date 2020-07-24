@@ -1,7 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../utils/constants.dart';
+import '../utils/constants.dart';
+import '../utils/constants.dart';
+import '../widgets/icon_content.dart';
 import 'results_page.dart';
 import '../widgets/cards.dart';
 import '../widgets/card_content.dart';
@@ -46,6 +49,9 @@ class _InputPageState extends State<InputPage> {
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.venus,
                       label: 'FEMALE',
+                      color: selectedGender == Gender.female
+                          ? KActiveColor
+                          : kDefaultInactiveColor,
                     ),
                   ),
                 ),
@@ -58,6 +64,9 @@ class _InputPageState extends State<InputPage> {
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.mars,
                       label: 'MALE',
+                      color: selectedGender == Gender.male
+                          ? KActiveColor
+                          : kDefaultInactiveColor,
                     ),
                   ),
                 ),
@@ -154,27 +163,41 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  Future alertUser(BuildContext context) {
-    return showDialog(
+  void alertUser(BuildContext context) {
+    showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text(
+          titlePadding: EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 25.0),
+          actionsPadding: EdgeInsets.only(bottom: 10.0, right: 15.0, top: 10.0),
+          title: Text(
             'You need to select a gender!',
-            style: kBMIDescriptionStyle,
+            textAlign: TextAlign.center,
+            style: kNumbersWarningStyle,
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Approve'),
+              child: Text(
+                'Approve',
+                style: kBMIDescriptionStyle,
+              ),
               color: kButtonColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              padding: EdgeInsets.all(10.0),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
           ],
-          backgroundColor: kActiveCardColor,
+          backgroundColor: kPrimaryColor,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(2.0))),
+            side: BorderSide(color: kActiveCardColor, width: 1.5),
+            borderRadius: BorderRadius.all(
+              Radius.circular(20.0),
+            ),
+          ),
         );
       },
     );

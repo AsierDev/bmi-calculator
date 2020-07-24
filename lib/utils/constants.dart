@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Colors
+const kPrimaryColor = Color(0xff0A0D22);
 const kActiveCardColor = Color(0xFF1D1E33);
 const kInactiveCardColor = Color(0xFF111328);
 const kButtonColor = Color(0xFFEB1555);
@@ -17,6 +18,10 @@ const kLabelTextStyle = TextStyle(
 const kNumbersTextStyle = TextStyle(
   fontSize: 50,
   fontWeight: FontWeight.bold,
+);
+const kNumbersWarningStyle = TextStyle(
+  fontSize: 23,
+  fontWeight: FontWeight.w400,
 );
 
 const kCalculateButton = TextStyle(
