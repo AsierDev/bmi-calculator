@@ -23,7 +23,7 @@ class ResultsPage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.only(left: 30.0, bottom: 15.0),
               alignment: Alignment.bottomLeft,
               child: Text(
                 'Your Result',
@@ -47,10 +47,13 @@ class ResultsPage extends StatelessWidget {
                     score,
                     style: kResultsScoreStyle,
                   ),
-                  Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: kBMIDescriptionStyle,
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
+                    child: Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: kBMIDescriptionStyle,
+                    ),
                   ),
                 ],
               ),

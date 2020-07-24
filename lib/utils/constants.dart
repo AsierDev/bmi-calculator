@@ -43,6 +43,7 @@ const kResultsScoreStyle = TextStyle(
 
 const kBMIDescriptionStyle = TextStyle(
   fontSize: 22.0,
+  height: 1.3,
 );
 
 //Values
