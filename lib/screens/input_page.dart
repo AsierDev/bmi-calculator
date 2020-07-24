@@ -1,18 +1,15 @@
+import 'package:bmi_calculator/widgets/alert_user_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../utils/constants.dart';
-import '../utils/constants.dart';
-import '../utils/constants.dart';
-import '../widgets/icon_content.dart';
 import 'results_page.dart';
+import '../utils/constants.dart';
+import '../utils/calculate_bmi.dart';
 import '../widgets/cards.dart';
 import '../widgets/card_content.dart';
 import '../widgets/calculate_button.dart';
-import '../widgets/slider.dart';
 import '../widgets/icon_content.dart';
-import '../utils/constants.dart';
-import '../utils/calculate_bmi.dart';
+import '../widgets/slider.dart';
 
 enum Gender { female, male }
 
@@ -143,19 +140,7 @@ class _InputPageState extends State<InputPage> {
           CalculateButton(
             title: 'Calculate',
             onPress: () {
-              CalculateBMI calc = CalculateBMI(height: height, weight: weight);
-
-              selectedGender == null
-                  ? alertUser(context)
-                  : Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ResultsPage(
-                                score: calc.getBMIValue(),
-                                message: calc.getMessage(),
-                                result: calc.getResult(),
-                              )),
-                    );
+              handlePress(context);
             },
           ),
         ],
@@ -163,43 +148,19 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  void alertUser(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          titlePadding: EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 25.0),
-          actionsPadding: EdgeInsets.only(bottom: 10.0, right: 15.0, top: 10.0),
-          title: Text(
-            'You need to select a gender!',
-            textAlign: TextAlign.center,
-            style: kNumbersWarningStyle,
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(
-                'Approve',
-                style: kBMIDescriptionStyle,
+  void handlePress(BuildContext context) {
+    CalculateBMI calc = CalculateBMI(height: height, weight: weight);
+    selectedGender == null
+        ? alertUser(context)
+        : Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ResultsPage(
+                score: calc.getBMIValue(),
+                message: calc.getMessage(),
+                result: calc.getResult(),
               ),
-              color: kButtonColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              padding: EdgeInsets.all(10.0),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             ),
-          ],
-          backgroundColor: kPrimaryColor,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: kActiveCardColor, width: 1.5),
-            borderRadius: BorderRadius.all(
-              Radius.circular(20.0),
-            ),
-          ),
-        );
-      },
-    );
+          );
   }
 }
