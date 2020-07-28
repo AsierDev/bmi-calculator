@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 
 class ResultsPage extends StatelessWidget {
   ResultsPage(
-      {@required this.score, @required this.result, @required this.message});
+      {@required this.score,
+      @required this.result,
+      @required this.message,
+      this.resetValues});
 
   final String score;
   final String result;
   final String message;
+  final Function resetValues;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +67,7 @@ class ResultsPage extends StatelessWidget {
             child: CalculateButton(
               title: 'Re-Calculate',
               onPress: () {
+                resetValues();
                 Navigator.pop(context);
               },
             ),

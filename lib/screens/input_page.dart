@@ -116,8 +116,10 @@ class _InputPageState extends State<InputPage> {
                     cardChild: CardContent(
                       amount: weight,
                       text: 'Weight',
-                      onAdd: () => setState(() => weight++),
-                      onReduce: () => setState(() => weight--),
+                      onAdd:
+                          weight < 200 ? () => setState(() => weight++) : null,
+                      onReduce:
+                          weight > 40 ? () => setState(() => weight--) : null,
                     ),
                   ),
                 ),
@@ -128,8 +130,8 @@ class _InputPageState extends State<InputPage> {
                     cardChild: CardContent(
                       amount: age,
                       text: 'Age',
-                      onAdd: () => setState(() => age++),
-                      onReduce: () => setState(() => age--),
+                      onAdd: age < 120 ? () => setState(() => age++) : null,
+                      onReduce: age > 18 ? () => setState(() => age--) : null,
                     ),
                   ),
                 ),
@@ -148,6 +150,15 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
+  defaultValues() {
+    setState(() {
+      selectedGender = null;
+      height = kInitialHeight;
+      weight = kInitialWeight;
+      age = kInitialAge;
+    });
+  }
+
   void handlePress(BuildContext context) {
     CalculateBMI calc = CalculateBMI(height: height, weight: weight);
     selectedGender == null
@@ -159,6 +170,7 @@ class _InputPageState extends State<InputPage> {
                 score: calc.getBMIValue(),
                 message: calc.getMessage(),
                 result: calc.getResult(),
+                resetValues: defaultValues,
               ),
             ),
           );
