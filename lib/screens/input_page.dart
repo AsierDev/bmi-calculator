@@ -160,7 +160,7 @@ class _InputPageState extends State<InputPage> {
   }
 
   void handlePress(BuildContext context) {
-    CalculateBMI calc = CalculateBMI(height: height, weight: weight);
+    CalculateBMI calc = CalculateBMI(height: height, weight: weight, age: age);
     selectedGender == null
         ? alertUser(context)
         : Navigator.push(

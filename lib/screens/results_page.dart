@@ -4,11 +4,12 @@ import 'package:bmi_calculator/widgets/cards.dart';
 import 'package:flutter/material.dart';
 
 class ResultsPage extends StatelessWidget {
-  ResultsPage(
-      {@required this.score,
-      @required this.result,
-      @required this.message,
-      this.resetValues});
+  ResultsPage({
+    @required this.score,
+    @required this.result,
+    @required this.message,
+    this.resetValues,
+  });
 
   final String score;
   final String result;
